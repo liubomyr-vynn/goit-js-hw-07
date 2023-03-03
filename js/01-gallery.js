@@ -25,11 +25,14 @@ galleryEl.addEventListener("click", handleGalleryClick);
 
 function handleGalleryClick(event) {
 	event.preventDefault();
-	basicLightbox
-		.create(
-			`
+	const instance = basicLightbox.create(
+		`
 		<img src="${event.target.dataset.source}">
 	`,
-		)
-		.show();
+	);
+	instance.show();
+
+	document.body.addEventListener("keydown", event => {
+		if (event.key === "Escape") instance.close();
+	});
 }
